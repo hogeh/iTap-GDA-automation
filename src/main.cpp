@@ -1,6 +1,9 @@
 #include <Arduino.h>
 #include "constants.h"
 #include "default.h"
+#include "HX711.h"
+
+HX711 scale;
 
 
 void initializesystem();
@@ -14,18 +17,19 @@ void setup() {
   pinMode(VALVE2, OUTPUT);
   pinMode(VALVE3, OUTPUT);
   pinMode(VALVE4, OUTPUT);
+  scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
   initializesystem();
 }
 
 void openclosevalve(int valveno, int valveopentime ,int valevedelay){
-  if (valveopentime>=1){  /if valveopentim is positive..
+  if (valveopentime>=1){  //if valveopentim is positive..
     digitalWrite(valveno, LOW);  //then open valve
     Serial.print("Valve ");
     Serial.print(valveno);       
     Serial.println(" is opened");
     delay(valveopentime);    //wait valveopentime 
   }
-  if (valveopentime!=1){  // if valveopentim is NOT 1
+  if (valveopentime!=1){  // if valveopentime is NOT 1
     digitalWrite(valveno, HIGH);  //then close valve
     Serial.print("Valve ");
     Serial.print(valveno);
@@ -36,7 +40,6 @@ void openclosevalve(int valveno, int valveopentime ,int valevedelay){
 
 
 void initializesystem(){
-  Serial.println("initializehx711");  
   openclosevalve(VALVE1,-1,0);// close all valves
   Serial.println("Close valve 1");
   openclosevalve(VALVE2,-1,0);
@@ -45,13 +48,30 @@ void initializesystem(){
   Serial.println("Close valve 3");
   openclosevalve(VALVE4,-1,0);
   Serial.println("Close valve 4");
+  delay(1000);
+  if (scale.is_ready()) {
+    Serial.println("HX711 ready");
+  } else {
+    Serial.println("HX711 not found.");
+  }   
+  
 }
 
 void contactserver(){
 
 }
 void  waitforbottle(){
-
+  while (true){
+    Serial.print("Waiting for bottle: ");
+    if (scale.is_ready()) {
+      long reading = scale.read();
+      Serial.print("HX711 reading: ");
+      Serial.println(reading);
+    } else {
+      Serial.println("HX711 not found.");
+    }
+    delay(1000); 
+  }
 }
 
  
@@ -88,12 +108,12 @@ void cip(){ //bottle filler cleaining in place process
 void loop(){
   contactserver();
   if (mode == 2 ){
-    calibrate();
+    calibrate();   //Mode=2: calibration process
    } else {
    if (mode == 3){
-      cip();
+      cip();//Mode=1: cleaning process
     } else {
-      fill();
+      fill(); // default process: bottle filling
     }
   }
 }
