@@ -4,4 +4,6 @@
 #define VALVE4 4
 #define LOADCELL_DOUT_PIN  21
 #define LOADCELL_SCK_PIN  3
-
+#define LED01 16
+#define LED02 17
+#define LED03 5

@@ -11,14 +11,20 @@ void initializesystem();
 
 
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(115200);
+ // 4 valve controles:
   pinMode(VALVE1, OUTPUT);
   pinMode(VALVE2, OUTPUT);
   pinMode(VALVE3, OUTPUT);
   pinMode(VALVE4, OUTPUT);
+// RGB LED for status indication
+  ledcSetup(ledChannel, freq, resolution);
+  ledcAttachPin(LED01, ledChannel);
+  ledcAttachPin(LED02, ledChannel);
+  ledcAttachPin(LED03, ledChannel);
+// Scale
   scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
-  initializesystem();
+   initializesystem();
 }
 
 void openclosevalve(int valveno, int valveopentime ,int valevedelay){
