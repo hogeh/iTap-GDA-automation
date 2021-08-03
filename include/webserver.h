@@ -36,6 +36,10 @@ void setup_webserver(){
    });
  
   server.on("/scalecalib/get", HTTP_GET, [](AsyncWebServerRequest *request){
+    if (request->hasParam("referenceweight")) {
+      int referenceweight = request->getParam("referenceweight")->value().toInt();
+      setscalefactor(referenceweight);
+    }
     request->send(200, "text/html", mainmenu());
   });
 

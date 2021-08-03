@@ -32,7 +32,7 @@ String pageheader =R"(
         }
         .form-style input,
         .form-style textarea,
-        .form-style select 
+        .form-style select,
         {
             box-sizing: border-box;
             -webkit-box-sizing: border-box;
@@ -45,10 +45,10 @@ String pageheader =R"(
             border-bottom: 1px solid #ddd;
             background: transparent;
             margin-bottom: 10px;
-            font: 1.4em Arial, Helvetica, sans-serif;
+            font: 1.8em Arial, Helvetica, sans-serif;
             height: 45px;
         }
-        .form-style textarea{
+       .form-style textarea{
             resize:none;
             overflow: hidden;
         }
@@ -81,25 +81,25 @@ String pageheader =R"(
             margin-bottom: 15px;
         }
         .form-style legend {
-	        font-size: 1.5em;
+	        font-size: 1.8em;
 	        margin-bottom: 10px;
         }
        .form-style label {
-	        font-size: 1.4em;
+	        font-size: 1.6em;
 	        margin-bottom: 10px;
         }
         .form-style .number {
             background: hsl(175, 60%, 53%);
             color: #fff;
-            height: 30px;
-            width: 30px;
+            height: 40px;
+            width: 40px;
             display: inline-block;
-            font-size: 1.2em;
+            font-size: 1.5em;
             margin-right: 4px;
             line-height: 30px;
             text-align: center;
             text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-            border-radius: 15px 15px 15px 0px;
+            border-radius: 20px 20px 20px 0px;
         }
 
         .form-style input[type="button"]:hover, 
@@ -225,13 +225,13 @@ String pageheader =R"(
     +"<h2>"+ Calibration + "</h2>\n"
     +"<form action=\"/get\">\n"
     +"<legend><span class=\"number\">1</span>" +Scalecalibration  + "</legend><div class=\"inner-wrap\">\n"
-    + "<label>"+ Instructions + "</label>"
-    + Referenceweight +"<input type=\"text\"  id=\"Referenceweight\" name=\"Referenceweight\" placeholder=\"" + Weight + "\"></label>\n"
+    +"<label>"+ Instructions + "</label><br>"
+    +"<label>" + Referenceweight + "</label><input type=\"text\"  id=\"referenceweight\" name=\"referenceweight\" placeholder=\"" + Weight + "\"></label>\n"
     +"</div><input type=\"submit\" value=\"" + Save + "\" onclick=\"submitMessage()\">"
     +"</form>"
-    +"<legend><span class=\"number\">2</span>"+ Bottles + "</legend><div class=\"inner-wrap\"><table>\n"
+    +"<legend><span class=\"number\">2</span>"+ Bottles + "</legend><div class=\"inner-wrap\">\n"
     +"<label>" + Bottleinstructions + "</label>"
-    +"<tr><td><label>"+ Bottle1vol +"</label></td><td><input type=\"text\" id=\"bottle1vol\" name=\"bottle1vol\" value=\"" + String(bottle[0][0]) + "\" readonly ></td>\n"
+    +"<table><tr><td width=\"40%\"><label>"+ Bottle1vol +"</label></td width=\"27%\"><td><input type=\"text\" id=\"bottle1vol\" name=\"bottle1vol\" value=\"" + String(bottle[0][0]) + "\" readonly ></td>\n"
     +"<td><a href=\"/bottle1vol\"><input type=\"submit\" value=\"" + Submit + "\"></a></td></tr>\n"
     +"<tr><td><label>"+ Bottle1weight +"</label></td><td><input type=\"text\" id=\"bottle1weight\" name=\"bottle1weight\" value=\"" + String(bottle[0][1]) + "\" readonly ></td>\n"
     +"<td><a href=\"/bottle1weight\"><input type=\"submit\" value=\"" + Submit + "\"></a></td></tr>\n"

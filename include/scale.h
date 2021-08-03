@@ -42,3 +42,7 @@ void scalesettle(){
 void setzeroscale(){
     zeroscale=scale.read();
 }
+void setscalefactor(int referenceweight){
+   scalefactor= (scale.read()-zeroscale)/referenceweight;
+   writeconfigdatatofile();
+}

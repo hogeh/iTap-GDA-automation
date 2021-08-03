@@ -22,7 +22,7 @@ void bottleerror(){
   String message="No known bottletype recognized!";
   showtext(message);
   setledcolor(red);
-  delay(1000);
+  delay(1500);
 }
 
 void emergencystop(){
@@ -270,6 +270,7 @@ void calibrateprocess(){
       i=bottletypes;
     }
   }
+  delay(500);
   setledcolor(black);
 }
 
