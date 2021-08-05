@@ -17,7 +17,7 @@ void scalesettle(){
    long currentscale = scale.read();
     int tobesettled=0;
    String message;
-   while (cycleno<settlecycles && !webmode){
+   while (cycleno<settlecycles){
       int delta=abs(currentscale - scale.read());
       if (delta>settletolerance){
          message="Scale sattling: "+ String(delta);
@@ -32,7 +32,6 @@ void scalesettle(){
       }
       delay(settlecycledelay);
    }
-   checkwebmode(webmode);
    if (tobesettled){
       message="Scale settled!";
       showtext(message);

@@ -53,8 +53,8 @@ void manualmode(){
 
 void scalemode(){
   setledcolor(purple);
-   int weight;
-  while (webmode==2){
+  int weight;
+  while (webmode==3){
     scalesettle();
     weight=getweightfromscale();
     String message="Scale mode! Weight: "+ String(weight) + "g";
@@ -74,7 +74,12 @@ void checkwebmode(int mode){
       if (mode==2){
          manualmode();
       } else {
-        scalemode();
+        if (mode==3){
+         scalemode();
+      } else {
+        Serial.println("mode not found "+ String(mode));
+      }
+
       }
     }
   }
@@ -86,6 +91,7 @@ int getbottletype(int weight){
   for (int i = 0; i <= bottletypes-1 ; i++) {
     if ((weight>=bottle[i][1]*(1-bottletolerance/100)) && (weight<=bottle[i][1]*(1+bottletolerance/100))){
       type=i+1;
+      Serial.println(type);
       bottle[i][1]=weight;
     }
   }
@@ -136,6 +142,7 @@ void waitforloadrelease(){
   }
   checkwebmode(webmode);
   setledcolor(black); 
+  setfillleds(1,1,black);
   scalesettle();
   closeallvalves();
 }
@@ -176,7 +183,7 @@ void autofillbottle(int bottle[]=defaultbottle,int ledcolor[]=beer){
       String message="Füllgewicht: "+ String(filllevel) + "g";
       showtext(message);
       setfillleds(filllevel,bottle[0],ledcolor);
-      if (filllevel<scaletolerance){
+      if (filllevel<-scaletolerance){
         webmode=1;
       }
       filllevel=getweightfromscale()-bottle[1];

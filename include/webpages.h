@@ -4,7 +4,7 @@ String pageheader =R"(
         <html>
             <head>
     <style type="text/css">
-        .form-style{
+               .form-style{
             font-family: arial, sans;
             width: 900px;
             padding: 30px;
@@ -32,7 +32,7 @@ String pageheader =R"(
         }
         .form-style input,
         .form-style textarea,
-        .form-style select,
+        .form-style select 
         {
             box-sizing: border-box;
             -webkit-box-sizing: border-box;
@@ -45,10 +45,10 @@ String pageheader =R"(
             border-bottom: 1px solid #ddd;
             background: transparent;
             margin-bottom: 10px;
-            font: 1.8em Arial, Helvetica, sans-serif;
+            font: 1.4em Arial, Helvetica, sans-serif;
             height: 45px;
         }
-       .form-style textarea{
+        .form-style textarea{
             resize:none;
             overflow: hidden;
         }
@@ -81,25 +81,25 @@ String pageheader =R"(
             margin-bottom: 15px;
         }
         .form-style legend {
-	        font-size: 1.8em;
+	        font-size: 1.5em;
 	        margin-bottom: 10px;
         }
        .form-style label {
-	        font-size: 1.6em;
+	        font-size: 1.4em;
 	        margin-bottom: 10px;
         }
         .form-style .number {
             background: hsl(175, 60%, 53%);
             color: #fff;
-            height: 40px;
-            width: 40px;
+            height: 30px;
+            width: 30px;
             display: inline-block;
-            font-size: 1.5em;
+            font-size: 1.2em;
             margin-right: 4px;
             line-height: 30px;
             text-align: center;
             text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-            border-radius: 20px 20px 20px 0px;
+            border-radius: 15px 15px 15px 0px;
         }
 
         .form-style input[type="button"]:hover, 
@@ -181,8 +181,9 @@ String pageheader =R"(
     String mainpage =pageheader + "<div class=\"form-style\"><h1>"+ Heading1+ "</h1>\n"
     +"<h2>"+ Mainmenu + "</h2>\n"
     +"<a href=\"/settings\"><input type=\"button\" value=\""+ Settings + "\"></a>\n"
-    +"<a href=\"/manuop\"><input type=\"button\" value=\""+ Manuop + "\"></a>\n"
+    +"<a href=\"/manual0\"><input type=\"button\" value=\""+ Manuop + "\"></a>\n"
    +"<a href=\"/scalecalib\"><input type=\"button\" value=\""+Scalecalibration +"\"></a>\n"
+    // +"<a href=\"/testscale\"><input type=\"button\" value=\""+Testscale +"\"></a>\n"
      +"<br><br><br><br><h2> </h2>\n<div></body></html>";
    return mainpage;
  }
@@ -202,6 +203,7 @@ String pageheader =R"(
     +"<label>"+ Purgeout +"<input type=\"text\" id=\"purgeout\" name=\"purgeout\" value=\"" + String(purgeout) + "\"></label>\n"
     +"<label>"+ Purgeoutpostdelay +"<input type=\"text\" id=\"purgeoutpostdelay\" name=\"purgeoutpostdelay\" value=\"" + String(purgeoutpostdelay) + "\"></label>\n"
     +"</div><legend><span class=\"number\">3</span>"+Bottles+"</legend><div class=\"inner-wrap\">\n"
+    +"<label>"+ Bottletolerance +"<input type=\"text\" id=\"bottletolerance\" name=\"bottletolerance\" value=\"" + String(bottletolerance) + "\"></label>\n"
     +"<label>"+ Bottle1vol +"<input type=\"text\" id=\"bottle1vol\" name=\"bottle1vol\" value=\"" + String(bottle[0][0]) + "\"></label>\n"
     +"<label>"+ Bottle1weight +"<input type=\"text\" id=\"bottle1weight\" name=\"bottle1weight\" value=\"" + String(bottle[0][1]) + "\"></label>\n"
     +"<label>"+ Bottle2vol +"<input type=\"text\" id=\"bottle2vol\" name=\"bottle2vol\" value=\"" + String(bottle[1][0]) + "\"></label>\n"
@@ -223,26 +225,27 @@ String pageheader =R"(
  String scalecalibform(){
     String mainpage =pageheader + "<div class=\"form-style\"><h1>"+ Heading1+ "</h1>\n"
     +"<h2>"+ Calibration + "</h2>\n"
-    +"<form action=\"/get\">\n"
+    +"<form action=\"/setscale\">\n"
     +"<legend><span class=\"number\">1</span>" +Scalecalibration  + "</legend><div class=\"inner-wrap\">\n"
     +"<label>"+ Instructions + "</label><br>"
-    +"<label>" + Referenceweight + "</label><input type=\"text\"  id=\"referenceweight\" name=\"referenceweight\" placeholder=\"" + Weight + "\"></label>\n"
+    +"<label>" + Referenceweight + "</label><input type=\"text\"  id=\"referenceweight\" name=\"referenceweight\" placeholder=\"(" +String(scalefactor) + ")\"></label>\n"
     +"</div><input type=\"submit\" value=\"" + Save + "\" onclick=\"submitMessage()\">"
     +"</form>"
     +"<legend><span class=\"number\">2</span>"+ Bottles + "</legend><div class=\"inner-wrap\">\n"
     +"<label>" + Bottleinstructions + "</label>"
-    +"<table><tr><td width=\"40%\"><label>"+ Bottle1vol +"</label></td width=\"27%\"><td><input type=\"text\" id=\"bottle1vol\" name=\"bottle1vol\" value=\"" + String(bottle[0][0]) + "\" readonly ></td>\n"
-    +"<td><a href=\"/bottle1vol\"><input type=\"submit\" value=\"" + Submit + "\"></a></td></tr>\n"
-    +"<tr><td><label>"+ Bottle1weight +"</label></td><td><input type=\"text\" id=\"bottle1weight\" name=\"bottle1weight\" value=\"" + String(bottle[0][1]) + "\" readonly ></td>\n"
+    +"<table>"
+     +"<tr><td width=\"40%\"><label>"+ Bottle1weight +"</label></td><td width=\"27%\"><input type=\"text\" id=\"bottle1weight\" name=\"bottle1weight\" value=\"" + String(bottle[0][1]) + "\" readonly ></td>\n"
     +"<td><a href=\"/bottle1weight\"><input type=\"submit\" value=\"" + Submit + "\"></a></td></tr>\n"
-    +"<tr><td><label>"+ Bottle2vol +"</label></td><td><input type=\"text\" id=\"bottle2vol\" name=\"bottle2vol\" value=\"" + String(bottle[1][0]) + "\" readonly ></td>\n"
-    +"<td><a href=\"/bottle2vol\"><input type=\"submit\" value=\"" + Submit + "\"></a></td></tr>\n"
+    +"<tr><td><label>"+ Bottle1vol +"</label></td><td><input type=\"text\" id=\"bottle1vol\" name=\"bottle1vol\" value=\"" + String(bottle[0][0]+bottle[0][1]) + "\" readonly ></td>\n"
+    +"<td><a href=\"/bottle1vol\"><input type=\"submit\" value=\"" + Submit + "\"></a></td></tr>\n"
     +"<tr><td><label>"+ Bottle2weight +"</label></td><td><input type=\"text\" id=\"bottle2weight\" name=\"bottle2weight\" value=\"" + String(bottle[1][1]) + "\" readonly ></td>\n"
     +"<td><a href=\"/bottle2weight\"><input type=\"submit\" value=\"" + Submit + "\"></a></td></tr>\n"
-    +"<tr><td><label>"+ Bottle3vol +"</label></td><td><input type=\"text\" id=\"bottle3vol\" name=\"bottle3vol\" value=\"" + String(bottle[2][0]) + "\" readonly ></td>\n"
-    +"<td><a href=\"/bottle3vol\"><input type=\"submit\" value=\"" + Submit + "\"></a></td></tr>\n"
+    +"<tr><td><label>"+ Bottle2vol +"</label></td><td><input type=\"text\" id=\"bottle2vol\" name=\"bottle2vol\" value=\"" + String(bottle[1][0]+bottle[1][1]) + "\" readonly ></td>\n"
+    +"<td><a href=\"/bottle2vol\"><input type=\"submit\" value=\"" + Submit + "\"></a></td></tr>\n"
     +"<tr><td><label>"+ Bottle3weight +"</label></td><td><input type=\"text\" id=\"bottle3weight\" name=\"bottle3weight\" value=\"" + String(bottle[2][1]) + "\" readonly ></td>\n"
     +"<td><a href=\"/bottle3weight\"><input type=\"submit\" value=\"" + Submit + "\"></a></td></tr>\n"
+    +"<tr><td><label>"+ Bottle3vol +"</label></td><td><input type=\"text\" id=\"bottle3vol\" name=\"bottle3vol\" value=\"" + String(bottle[2][0]+bottle[2][1]) + "\" readonly ></td>\n"
+    +"<td><a href=\"/bottle3vol\"><input type=\"submit\" value=\"" + Submit + "\"></a></td></tr>\n"
     +"</table></div> \n"
     +"<br><br><br><a href=\"/\"><input type=\"button\" value=\""+ Mainmenu + "\"></a><br><br><br>\n"
     +"<</form><h2></h2></div></body></html>";

@@ -12,6 +12,7 @@
     String Purgeoutpostdelay;
     String Purgeout;
     String Bottles;
+    String Bottletolerance;
     String Bottletypes;
     String Bottle1vol;
     String Bottle1weight;
@@ -36,6 +37,7 @@
     String Emergencystop;
     String Manual;
     String Submit;
+    String Testscale;
     String Bottleinstructions;
 
 void set_language(){
@@ -54,6 +56,7 @@ void set_language(){
      Purgeoutpostdelay="Entl&uuml;ftungspause [ms]";
      Purgeout="CO2 Entl&uuml;ftungszeit [ms]";
      Bottles= "Flaschentypen";
+     Bottletolerance= "Toleranz bei Flaschenerkennung [%]";
      Bottletypes= "Anzahl Flaschentypen in Gebrauch";
      Bottle1vol= "Flaschenvolumen 1 [ml]";
      Bottle1weight= "Flaschengewicht 1 [g]";
@@ -78,7 +81,8 @@ void set_language(){
      Emergencystop="Notaus";
      Manual="Handbetrieb";
      Submit="&Uuml;bernehmen";
-     Bottleinstructions="Flaschenkalibraierung: leere oder gef&uuml;llte Flasche einh&auml;ngen und gemessenen Wert der Wage mit entsprechendem Knopfdruck &uuml;bernehmen.";
+     Testscale="Waagentest";
+     Bottleinstructions="Flaschenkalibrierung: leere oder gef&uuml;llte Flasche einh&auml;ngen und gemessenen Wert der Wage mit entsprechendem Knopfdruck &uuml;bernehmen.";
  }  else {
      Heading1= "iTap Bottlefiller";
      Configuration= "Configuration Parameters";
@@ -93,6 +97,7 @@ void set_language(){
      Purgeinpostdelay="Flood delay [ms]";
      Purgeoutpostdelay="Vent delay[ms]";
      Purgeout="CO2 vent time [ms]";
+     Bottletolerance= "Bottle recognition tolerance [%]";
      Bottles= "Bottletypes";
      Bottletypes= "Number of bottle types in use";
      Bottle1vol= "Bottle volume 1 [ml]";
@@ -118,6 +123,7 @@ void set_language(){
     Emergencystop="Emergency stop";
     Manual="Manual mode";
     Submit="Submit";
+    Testscale="Test scale";
     Bottleinstructions="Bottle Calibration: hang up empty or filled bottle and save measured value by pressing related 'Submit' button.";
    }
 }
