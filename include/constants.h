@@ -6,6 +6,8 @@
 #define LOADCELL_SCK_PIN  5
 #define LED01 16
 #define LED02MAX 20
+#define MQ_PIN  25     //define which analog input channel you are going to use
+
 
 
 
