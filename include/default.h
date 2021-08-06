@@ -28,14 +28,6 @@ int walvestat3=0;
 int walvestat4=0;
 int webmode=0;
 int scaletolerance=20;
-float coro =  10;                 //Co Ro is initialized to 10 kilo ohms
 
 
 
-/***********************Software Related Macros************************************/
-#define         CALIBARAION_SAMPLE_TIMES     (50)    //define how many samples you are going to take in the calibration phase
-#define         CALIBRATION_SAMPLE_INTERVAL  (500)   //define the time interal(in milisecond) between each samples in the
-                                                     //cablibration phase
-#define         READ_SAMPLE_INTERVAL         (50)    //define how many samples you are going to take in normal operation
-#define         READ_SAMPLE_TIMES            (5)     //define the time interal(in milisecond) between each samples in 
-                                                     //normal operation

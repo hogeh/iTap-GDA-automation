@@ -13,31 +13,15 @@
 #include "scale.h"
 #include "webpages.h"
 #include "webserver.h"
-#include "mqgas.h"
 
 
-void initializegassensor()
+void calibrateCO2()
 {
-  Serial.print("Calibrating...\n");                
-  coro = MQCalibration();                       //Calibrating the sensor. Please make sure the sensor is in clean air 
-                                                  //when you perform the calibration                    
-  Serial.print("Calibration is done...\n"); 
-  Serial.print("Ro=");
-  Serial.print(coro);
-  Serial.print("kohm");
-  Serial.print("\n");
-}
+ }
  
-void checkCOlevel()
+void checkCO2level()
 {
-   Serial.print("CO:"); 
-   Serial.print(MQGetGasPercentage(MQRead(MQ_PIN)/coro,1) );
-   Serial.print( "ppm" );
-   Serial.print("    ");   
-   Serial.print("\n");
-   delay(200);
 }
-
 
 
 void bottleerror(){
