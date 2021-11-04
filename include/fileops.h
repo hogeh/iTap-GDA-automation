@@ -3,8 +3,8 @@
 
 void startspiffs(){
   if(!SPIFFS.begin(true)){
-   String message="Error  mounting SPIFFS";
-   showtext(message);
+   String message3="Error  mounting SPIFFS";
+   showtext(message3,2);
    return;
   }
 }
@@ -13,8 +13,8 @@ String readFile(fs::FS &fs, const char * path){
   //Serial.printf("Reading file: %s\r\n", path);
   File file = fs.open(path, "r");
   if(!file || file.isDirectory()){
-    String message="Error reading file";
-    showtext(message);
+    String message3="Error reading file";
+    showtext(message3,2);
     return String();
   }
   //Serial.println("- read from file:");
@@ -74,20 +74,22 @@ void writeconfigdatatofile(){
   doc["scalefactor"] = scalefactor;
   String JSONMessage;
   serializeJson(doc, JSONMessage);
-  String message="Parameters saved";
   if (!writeFile(SPIFFS, filename, JSONMessage.c_str())){
-    message="Parameters saving failed";
-  };
-  showtext(message);
+    String message3="Parameters saving failed";
+    showtext(message3,2);
+  } else {
+    message="Parameters saved";
+    showtext(message);
+  }
 }
 
 void readconfigdatafromfile(){
   String JSONMessage = readFile(SPIFFS, filename);
   StaticJsonDocument<1024>doc;                        //Memory pool
   auto error = deserializeJson(doc, JSONMessage); 
-  String message="Parameters loaded!";
   if (error) {   //Check for errors in parsing
-     message="Parameter loading failed";
+     String message3="Parameter loading failed";
+     showtext(message3,2);
   } else {
     purgecycles=doc["purgecycles"]  ;
     language=doc["language"]  ;
@@ -114,6 +116,7 @@ void readconfigdatafromfile(){
     settlecycledelay=doc["settlecycledelay"]  ;
     zeroscale=doc["zeroscale"]  ;
     scalefactor=doc["scalefactor"]  ;
+    message="Parameters loaded!";
     showtext(message);
   }
 }

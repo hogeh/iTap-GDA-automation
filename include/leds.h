@@ -6,12 +6,12 @@ void startleds(){
   pixels.begin(); // This initializes the NeoPixel library.
 }
 
-void setledcolor(int color[]=white,int max=1,int dimvalue=1,int ledno=0){
+void setledcolor(int color[]=black,int max=1,int dimvalue=1,int ledno=0){
   int ledcolor[3];
   for (int i = 0; i <= 2; i++) { 
-      ledcolor[i]=color[i]*dimvalue/max;
+      ledcolor[i]=color[i]*abs(dimvalue)/max;
   }
-  if (ledno){
+  if (ledno){ //to be solved later!!  no clue why for the single LED the RGB colors are scrambled!!!!!
     pixels.setPixelColor(ledno, pixels.Color(ledcolor[0],ledcolor[1],ledcolor[2]));
   } else {
     pixels.setPixelColor(ledno, pixels.Color(ledcolor[1],ledcolor[0],ledcolor[2]));
@@ -33,4 +33,8 @@ void setfillleds(int current,int max,int thisledcolor[]){
     }
   }
   setledcolor(thisledcolor,max,current);
+}
+
+void testleds(){
+  
 }

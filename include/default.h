@@ -4,7 +4,7 @@ int language=1;
 int purgecycles=2;
 int purgein=1300;
 int purgeinpostdelay=100;
-int purgeout=1200;
+int purgeout=1400;
 int purgeoutpostdelay=100;
 float bottletolerance=20;
 int bottletypes=3;
@@ -16,18 +16,20 @@ int waitforcalibrationbottle=5;
 int waitforfillbottle=30;
 int waitforcipbottle=5;
 int settletolerance=11000;
-int settlecycles=15;
+int settlecycles=6;
 int settlecycledelay=0;
 int zeroscale=531033;
 int scalefactor=1145;
 int stripeleds=20;
 int stripematrix=1;
-int walvestat1=0;
-int walvestat2=0;
-int walvestat3=0;
-int walvestat4=0;
+int valvestat1=0;
+int valvestat2=0;
+int valvestat3=0;
+int valvestat4=0;
 int webmode=0;
 int scaletolerance=20;
+String message="";
+
 
 
 

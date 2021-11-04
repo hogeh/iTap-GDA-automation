@@ -6,7 +6,7 @@
 #define LOADCELL_SCK_PIN  5
 #define LED01 16
 #define LED02MAX 20
-#define MQ_PIN  25     //define which analog input channel you are going to use
+#define MQ_PIN  25    
 
 
 
@@ -34,4 +34,4 @@ int darkgray[]={80,80,80};
 int gray[]={80,80,80};
 int black[]={0,0,0};
 int bianchi[]={61, 207, 194};
-int bianchioff[]={42, 137, 129};
+

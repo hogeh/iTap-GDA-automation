@@ -72,7 +72,7 @@ void set_language(){
      Cleanpurgeout= "Sp&uuml;ldauer Schnellablassventil [ms]";
      Cleanschmockeout= "Sp&uuml;ldauer Feinablassventil [ms]";
      Scalecalibration="Kalibrierung der Waage";
-     Instructions="Gef&uuml;llte Flasche mit bekanntem Gewicht einh&auml;ngen, warten bis LED erloschen, dann 'Speichern' dr&uuml;cken.";
+     Instructions="Gef&uuml;llte Flasche mit bekanntem Gewicht einh&auml;ngen, warten bis rote LED erloschen, dann 'Speichern' dr&uuml;cken.";
      Referenceweight="Bekanntes Gewicht [g]";
      Weight = "Gewicht";
      Save = "Speichern";
@@ -114,7 +114,7 @@ void set_language(){
      Cleanpurgeout= "Flood duration fast vent [ms]";
      Cleanschmockeout= "Flood duration slow vent [ms]";
      Scalecalibration="Scale Calibration"; 
-    Instructions="Hang up filled bottle with known weight, wait until LED is off and press 'Enter'";
+    Instructions="Hang up filled bottle with known weight, wait until red LED is off and press 'Enter'";
     Referenceweight="Known weight [g]";
     Weight="Weight";
     Save = "Save";

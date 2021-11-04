@@ -8,6 +8,7 @@ void startscale(){
 }
 
 int getweightfromscale(){
+   int scalefactor=1145;
    return (scale.read()-zeroscale)/scalefactor;
 }
 
@@ -16,12 +17,12 @@ void scalesettle(){
    int cycleno=1;
    long currentscale = scale.read();
     int tobesettled=0;
-   String message;
+
    while (cycleno<settlecycles){
       int delta=abs(currentscale - scale.read());
       if (delta>settletolerance){
-         message="Scale sattling: "+ String(delta);
-         showtext(message);
+         String message2="Scale sattling: "+ String(delta);
+         showtext(message2,1);
          setledcolor(red);
          cycleno=1;
          currentscale = scale.read(); 
@@ -36,12 +37,15 @@ void scalesettle(){
       message="Scale settled!";
       showtext(message);
    }
- }
+}
 
 void setzeroscale(){
-    zeroscale=scale.read();
+ scalesettle();
+ zeroscale=scale.read();
 }
+
 void setscalefactor(int referenceweight){
+   scalesettle();
    scalefactor= (scale.read()-zeroscale)/referenceweight;
    writeconfigdatatofile();
 }

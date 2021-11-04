@@ -1,4 +1,3 @@
-
 String pageheader =R"(
     <!DOCTYPE html>
         <html>
@@ -174,14 +173,14 @@ String pageheader =R"(
         </style>
    </head>    
   <body>
- )" ;
+ )" + message;
  
  
  String mainmenu(){
     String mainpage =pageheader + "<div class=\"form-style\"><h1>"+ Heading1+ "</h1>\n"
     +"<h2>"+ Mainmenu + "</h2>\n"
     +"<a href=\"/settings\"><input type=\"button\" value=\""+ Settings + "\"></a>\n"
-    +"<a href=\"/manual0\"><input type=\"button\" value=\""+ Manuop + "\"></a>\n"
+    +"<a href=\"/manual1\"><input type=\"button\" value=\""+ Manuop + "\"></a>\n"
    +"<a href=\"/scalecalib\"><input type=\"button\" value=\""+Scalecalibration +"\"></a>\n"
     // +"<a href=\"/testscale\"><input type=\"button\" value=\""+Testscale +"\"></a>\n"
      +"<br><br><br><br><h2> </h2>\n<div></body></html>";
@@ -228,7 +227,7 @@ String pageheader =R"(
     +"<form action=\"/setscale\">\n"
     +"<legend><span class=\"number\">1</span>" +Scalecalibration  + "</legend><div class=\"inner-wrap\">\n"
     +"<label>"+ Instructions + "</label><br>"
-    +"<label>" + Referenceweight + "</label><input type=\"text\"  id=\"referenceweight\" name=\"referenceweight\" placeholder=\"(" +String(scalefactor) + ")\"></label>\n"
+    +"<label>" + Referenceweight + "</label><input type=\"text\"  id=\"referenceweight\" name=\"referenceweight\" placeholder=\"0\"></label>\n"
     +"</div><input type=\"submit\" value=\"" + Save + "\" onclick=\"submitMessage()\">"
     +"</form>"
     +"<legend><span class=\"number\">2</span>"+ Bottles + "</legend><div class=\"inner-wrap\">\n"
@@ -247,32 +246,33 @@ String pageheader =R"(
     +"<tr><td><label>"+ Bottle3vol +"</label></td><td><input type=\"text\" id=\"bottle3vol\" name=\"bottle3vol\" value=\"" + String(bottle[2][0]+bottle[2][1]) + "\" readonly ></td>\n"
     +"<td><a href=\"/bottle3vol\"><input type=\"submit\" value=\"" + Submit + "\"></a></td></tr>\n"
     +"</table></div> \n"
-    +"<br><br><br><a href=\"/\"><input type=\"button\" value=\""+ Mainmenu + "\"></a><br><br><br>\n"
-    +"<</form><h2></h2></div></body></html>";
+    +"<br><a href=\"/\"><input type=\"button\" value=\""+ Mainmenu + "\"></a><br><br><br>\n"
+    +"</div></body></html>";
    return mainpage;
  }
 
  String manuop(){
     String mainpage =pageheader + "<div class=\"form-style\"><h1>"+ Heading1+ "</h1>\n"
     +"<h2>"+ Manuop + "</h2>\n"
-    +"<a href=\"/manuop1"+String(abs(walvestat1-1))+"\"><button class=\"button"+String(walvestat1)+"\"><span class=\"front"+String(walvestat1)+"\">V1</span></button></a>\n"
-    +"<a href=\"/manuop2"+String(abs(walvestat2-1))+"\"><button class=\"button"+String(walvestat2)+"\"><span class=\"front"+String(walvestat2)+"\">V2</span></button></a>\n"
-    +"<a href=\"/manuop3"+String(abs(walvestat3-1))+"\"><button class=\"button"+String(walvestat3)+"\"><span class=\"front"+String(walvestat3)+"\">V3</span></button></a>\n"
-    +"<a href=\"/manuop4"+String(abs(walvestat4-1))+"\"><button class=\"button"+String(walvestat4)+"\"><span class=\"front"+String(walvestat4)+"\">V4</span></button></a>\n"
+    +"<a href=\"/manuop1"+String(abs(valvestat1-1))+"\"><button class=\"button"+String(valvestat1)+"\"><span class=\"front"+String(valvestat1)+"\">V1</span></button></a>\n"
+    +"<a href=\"/manuop2"+String(abs(valvestat2-1))+"\"><button class=\"button"+String(valvestat2)+"\"><span class=\"front"+String(valvestat2)+"\">V2</span></button></a>\n"
+    +"<a href=\"/manuop3"+String(abs(valvestat3-1))+"\"><button class=\"button"+String(valvestat3)+"\"><span class=\"front"+String(valvestat3)+"\">V3</span></button></a>\n"
+    +"<a href=\"/manuop4"+String(abs(valvestat4-1))+"\"><button class=\"button"+String(valvestat4)+"\"><span class=\"front"+String(valvestat4)+"\">V4</span></button></a>\n"
     +"<br><br><br><a href=\"/emergency\"><button class=\"buttonemergency\"><span class=\"frontemergency\"></span></button></a>"+Emergencystop+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
     +"<a href=\"/manual"+String(abs(webmode/2-1))+"\"><button class=\"button"+String(webmode/2)+"\"><span class=\"front"+String(webmode/2)+"\"><label>"+Manual+"</label></span></button></a>\n"
      +"<br><br><br><a href=\"/\"><input type=\"button\" value=\""+ Mainmenu + "\"></a>\n"
     +"<br><br><br><h2> </h2></div></body></html>";
    return mainpage;
  }
+
  String emergencyform(){
     String mainpage =pageheader + "<div class=\"form-style\"><h1>"+ Heading1+ "</h1>\n"
     +"<h2>"+ Manuop + "</h2>\n"
     +"<form action=\"/reset\">\n"
-       +"<button class=\"button"+String(walvestat1)+"0\"><span class=\"front"+String(walvestat1)+"\">V1</span></button>\n"
-    +"<button class=\"button"+String(walvestat2)+"0\"><span class=\"front"+String(walvestat2)+"\">V2</span></button>\n"
-    +"<button class=\"button"+String(walvestat3)+"0\"><span class=\"front"+String(walvestat3)+"\">V3</span></button>\n"
-    +"<button class=\"button"+String(walvestat4)+"0\"><span class=\"front"+String(walvestat4)+"\">V4</span></button>\n"
+       +"<button class=\"button"+String(valvestat1)+"0\"><span class=\"front"+String(valvestat1)+"\">V1</span></button>\n"
+    +"<button class=\"button"+String(valvestat2)+"0\"><span class=\"front"+String(valvestat2)+"\">V2</span></button>\n"
+    +"<button class=\"button"+String(valvestat3)+"0\"><span class=\"front"+String(valvestat3)+"\">V3</span></button>\n"
+    +"<button class=\"button"+String(valvestat4)+"0\"><span class=\"front"+String(valvestat4)+"\">V4</span></button>\n"
     +"<br><br><br><input type=\"submit\" value=\"Reset\" onclick=\"submitMessage()\"><br><br><br>"
     +"</form><h2> </h2></div></body></html>";
    return mainpage;

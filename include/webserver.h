@@ -14,7 +14,7 @@ void notFound(AsyncWebServerRequest *request) {
 }
 
 
-void setup_webserver(){
+void startwebserver(){
   WiFi.softAP(ssid, password);
   WiFi.softAPConfig(local_ip, gateway, subnet);
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -45,26 +45,25 @@ void setup_webserver(){
  
   server.on("/setscale", HTTP_GET, [](AsyncWebServerRequest *request){
     if (request->hasParam("referenceweight")) {
-      String message;
       int referenceweight = request->getParam("referenceweight")->value().toInt();
       if (referenceweight) {
         setscalefactor(referenceweight);
-        webmode=0;
-        request->send(200, "text/html", mainmenu());
+       // webmode=0;
         message="Scale calibration succeed!";
         showtext(message);
       } else {
-        message="Scale calibration failed!";
-        showtext(message);
+        String message3="Scale calibration failed!";
+        showtext(message3,2);
       }
-    }
+      request->send(200, "text/html", scalecalibform());
+   }
   });
 
   server.on("/manuop", HTTP_GET, [](AsyncWebServerRequest *request){
-    walvestat1=0;
-    walvestat2=0;
-    walvestat3=0;
-    walvestat4=0;
+    valvestat1=0;
+    valvestat2=0;
+    valvestat3=0;
+    valvestat4=0;
     closeallvalves();
     webmode=2;
     request->send(200, "text/html", manuop());
@@ -72,10 +71,10 @@ void setup_webserver(){
   
   server.on("/emergency", HTTP_GET, [](AsyncWebServerRequest *request){
     webmode=1;
-    walvestat1=0;
-    walvestat2=0;
-    walvestat3=0;
-    walvestat4=0;
+    valvestat1=0;
+    valvestat2=0;
+    valvestat3=0;
+    valvestat4=0;
     request->send(200, "text/html", emergencyform());
   });
  
@@ -90,50 +89,50 @@ void setup_webserver(){
   });
  
  server.on("/manuop10", HTTP_GET, [](AsyncWebServerRequest *request){
-    walvestat1=0;
-    openclosevalve(1, walvestat1);
+    valvestat1=0;
+    openclosevalve(1, valvestat1);
     request->send(200, "text/html", manuop());
   });
  
   server.on("/manuop11", HTTP_GET, [](AsyncWebServerRequest *request){
-    walvestat1=1;
-    openclosevalve(1, walvestat1);
+    valvestat1=1;
+    openclosevalve(1, valvestat1);
     request->send(200, "text/html", manuop());
   });
  
   server.on("/manuop20", HTTP_GET, [](AsyncWebServerRequest *request){
-    walvestat2=0;
-    openclosevalve(2, walvestat2);
+    valvestat2=0;
+    openclosevalve(2, valvestat2);
     request->send(200, "text/html", manuop());
   });
  
   server.on("/manuop21", HTTP_GET, [](AsyncWebServerRequest *request){
-    walvestat2=1;
-    openclosevalve(2, walvestat2);
+    valvestat2=1;
+    openclosevalve(2, valvestat2);
     request->send(200, "text/html", manuop());
  });
  
   server.on("/manuop30", HTTP_GET, [](AsyncWebServerRequest *request){
-    walvestat3=0;
-    openclosevalve(3, walvestat3);
+    valvestat3=0;
+    openclosevalve(3, valvestat3);
     request->send(200, "text/html", manuop());
   });
  
   server.on("/manuop31", HTTP_GET, [](AsyncWebServerRequest *request){
-    walvestat3=1;
-    openclosevalve(3, walvestat3);
+    valvestat3=1;
+    openclosevalve(3, valvestat3);
     request->send(200, "text/html", manuop());
   });
  
   server.on("/manuop40", HTTP_GET, [](AsyncWebServerRequest *request){
-    walvestat4=0;
-    openclosevalve(4, walvestat4);
+    valvestat4=0;
+    openclosevalve(4, valvestat4);
     request->send(200, "text/html", manuop());
   });
  
   server.on("/manuop41", HTTP_GET, [](AsyncWebServerRequest *request){
-    walvestat4=1;
-    openclosevalve(4, walvestat4);
+    valvestat4=1;
+    openclosevalve(4, valvestat4);
     request->send(200, "text/html", manuop());
   });
 
