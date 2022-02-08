@@ -8,7 +8,6 @@ void startscale(){
 }
 
 int getweightfromscale(){
-   int scalefactor=1145;
    return (scale.read()-zeroscale)/scalefactor;
 }
 
@@ -45,7 +44,10 @@ void setzeroscale(){
 }
 
 void setscalefactor(int referenceweight){
+   Serial.println("referenceweight: "  );
    scalesettle();
-   scalefactor= (scale.read()-zeroscale)/referenceweight;
+   Serial.println("Scalefactor: "  );
+    scalefactor= (scale.read()-zeroscale)/referenceweight;
    writeconfigdatatofile();
+   readconfigdatafromfile();
 }

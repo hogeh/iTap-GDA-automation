@@ -27,7 +27,7 @@ int valvestat2=0;
 int valvestat3=0;
 int valvestat4=0;
 int webmode=0;
-int scaletolerance=20;
+int scaletolerance=50;
 String message="";
 
 

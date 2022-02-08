@@ -1,12 +1,12 @@
-#define VALVE1 15
-#define VALVE2 18
-#define VALVE3 0
-#define VALVE4 4
-#define LOADCELL_DOUT_PIN  17
-#define LOADCELL_SCK_PIN  5
-#define LED01 16
-#define LED02MAX 20
-#define MQ_PIN  25    
+#define VALVE1 15  //ESP32 PIN
+#define VALVE2 18  //ESP32 PIN
+#define VALVE3 0   //ESP32 PIN
+#define VALVE4 4   //ESP32 PIN
+#define LOADCELL_DOUT_PIN  17   //ESP32 PIN
+#define LOADCELL_SCK_PIN  5    //ESP32 PIN
+#define LED01 16  //ESP32 PIN
+#define LED02MAX 20  //Number of LEDs on LED stripe
+#define Dis_PIN  25   //Display 
 
 
 
@@ -23,7 +23,7 @@ int defaultbottle[] = {500,380};
 // RGB constances
 int red[] = { 255, 0, 0 };
 int yellow[] = { 255,255, 0 };
-int beer[] = { 255,188, 0 };
+int beer[] = { 128,94, 0 };
 int blue[] = { 0, 0 , 255};
 int steelblue[] = { 99,184,255};
 int green[] = { 0,255,  0 };

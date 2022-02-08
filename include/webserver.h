@@ -14,6 +14,10 @@ void notFound(AsyncWebServerRequest *request) {
 }
 
 
+void stopwebserver(){
+  server.end();
+}
+
 void startwebserver(){
   WiFi.softAP(ssid, password);
   WiFi.softAPConfig(local_ip, gateway, subnet);
@@ -150,7 +154,7 @@ server.on("/bottle1weight", HTTP_GET, [](AsyncWebServerRequest *request){
   });
 server.on("/bottle2vol", HTTP_GET, [](AsyncWebServerRequest *request){
     scalesettle();
-    bottle[1][0]=getweightfromscale()-bottle[1][1];
+     bottle[1][0]=getweightfromscale()-bottle[1][1];
     writeconfigdatatofile();
     request->send(200, "text/html", scalecalibform());
   });
@@ -197,6 +201,9 @@ server.on("/get", HTTP_GET, [] (AsyncWebServerRequest *request) {
   }
   if (request->hasParam("bottletolerance")) {
     bottletolerance = request->getParam("bottletolerance")->value().toFloat();;
+  }
+ if (request->hasParam("scaletolerance")) {
+    scaletolerance = request->getParam("scaletolerance")->value().toFloat();;
   }
  if (request->hasParam("bottle1vol")) {
     bottle[0][0] = request->getParam("bottle1vol")->value().toInt();;

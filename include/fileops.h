@@ -58,6 +58,7 @@ void writeconfigdatatofile(){
   doc["bottle1vol"]=bottle[0][0];
   doc["bottle1weight"]=bottle[0][1];
   doc["bottle2vol"]=bottle[1][0];
+  Serial.println(bottle[1][0]);
   doc["bottle2weight"]=bottle[1][1];
   doc["bottle3vol"]=bottle[2][0];
   doc["bottle3weight"]=bottle[2][1];
@@ -72,7 +73,8 @@ void writeconfigdatatofile(){
   doc["settlecycledelay"] = settlecycledelay;
   doc["zeroscale"] = zeroscale;
   doc["scalefactor"] = scalefactor;
-  String JSONMessage;
+  doc["scaletolerance"] = scaletolerance;
+ String JSONMessage;
   serializeJson(doc, JSONMessage);
   if (!writeFile(SPIFFS, filename, JSONMessage.c_str())){
     String message3="Parameters saving failed";
@@ -116,6 +118,7 @@ void readconfigdatafromfile(){
     settlecycledelay=doc["settlecycledelay"]  ;
     zeroscale=doc["zeroscale"]  ;
     scalefactor=doc["scalefactor"]  ;
+    scaletolerance=doc["scaletolerance"]  ;
     message="Parameters loaded!";
     showtext(message);
   }

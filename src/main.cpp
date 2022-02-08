@@ -124,7 +124,7 @@ int  waitforload(int waitcycles,int threshold,int ledcolor[]){
     if (currentweight>threshold){
       wait=0;
       load=currentweight;
-   } else {
+    } else {
       wait--;
       setledcolor(ledcolor,waitcycles,wait);
       delay(333);
@@ -188,6 +188,8 @@ void autofillbottle(int bottle[]=defaultbottle,int ledcolor[]=beer){
       setfillleds(filllevel,bottle[0],ledcolor);
       if (filllevel<-scaletolerance){
         webmode=1;
+        String message2="Emergencystop: "+ String(-scaletolerance) + "g";
+        showtext(message2,1);
       }
       filllevel=getweightfromscale()-bottle[1];
     }
@@ -202,7 +204,7 @@ void autofillbottle(int bottle[]=defaultbottle,int ledcolor[]=beer){
 ///// Main Processes: Calibrate/Fill/CIP
 
 int cipprocess(){ //bottle filler cleaining in place process
-  message="CIP process";
+  message="CIP process" + String(bottletolerance);
   showtext(message);
   int bottleweight=waitforload(waitforcipbottle,bottle[0][1]*(1-2*bottletolerance/100),blue);
   if (bottleweight){
@@ -289,18 +291,44 @@ void calibrateprocess(){
 void testscale(){
   message="Testscale";
   showtext(message);
+  while (getweightfromscale()>scaletolerance){
+     String message2="Weight: "+ String(getweightfromscale()>scaletolerance) +"g" ;
+     showtext(message2,1);
+     setledcolor(red); 
+  }  
+  setledcolor(black);
   setzeroscale();
+  int webserveron=0;
   int pressure=abs(getweightfromscale());
   unsigned long start = millis ();
   int maxweight=500;
-   while ((millis () - start<3500 && pressure<=maxweight)){
-    String message2="Weight: "+ String(pressure) +"g";
+   while ((millis () - start<3000 || webserveron)){
+    String message2="Weight: "+ String(pressure) +"g - Webserver: " + webserveron;
     showtext(message2,1);
-    setfillleds(maxweight-pressure,maxweight,orange);
+    if (webserveron){
+      setfillleds(maxweight-pressure,maxweight,bianchi);
+    } else {
+      setfillleds(maxweight-pressure,maxweight,orange);
+    }
+    if (pressure>maxweight){
+      if (webserveron){
+        String message2="Webserver off";  showtext(message2,1);
+        stopwebserver();
+        setfillleds(maxweight,maxweight,orange);
+        delay(1000); 
+        webserveron=0;
+      } else {
+        String message2="Webserver ON";  showtext(message2,1);
+        startwebserver();
+        setfillleds(maxweight,maxweight,bianchi);
+        delay(1000); 
+        webserveron=1;
+      }
+    } 
     pressure=abs(getweightfromscale());
-  }
-  setfillleds(1,1,black);
  }
+  setfillleds(1,1,black);
+}
 
 
 
@@ -308,7 +336,6 @@ void setup() {
   message="Initialization";
   showtext(message);
   startleds();
-  setledcolor(white);
   pinMode(VALVE1, OUTPUT);
   pinMode(VALVE2, OUTPUT);
   pinMode(VALVE3, OUTPUT);
@@ -317,12 +344,13 @@ void setup() {
   startdisplay();
   startscale();
   startspiffs(); 
-  startwebserver();
   set_language();
   readconfigdatafromfile();
+//  startwebserver();
   testscale();
   calibrateprocess();
   setledcolor(black);
+  startwebserver();
 }
 
 void loop(){
